@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MLBcapstone.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,7 @@ namespace MLBcapstone.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
             return View();
@@ -25,6 +27,16 @@ namespace MLBcapstone.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public ActionResult PlayerTable()
+        {
+            var catchers = from a in db.PlayerInfo
+                           where a.position == "C"
+                           select a;
+
+            return View(catchers.ToList());
+            //return View(db.PlayerInfo.ToList());
         }
     }
 }
