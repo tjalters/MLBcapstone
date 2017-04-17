@@ -45,10 +45,18 @@ namespace MLBcapstone.Controllers
         }
         public ActionResult OptimizeRoster()
         {
-            var players = from a in db.PlayerInfo
+            var players = from a in db.PlayerInfo.Take(25)
                           orderby a.playerValue
                           select a;
 
+            //var catchers = from a in db.PlayerInfo
+            //               where a.position == "C"
+            //               orderby a.playerValue
+            //               select a;
+
+
+
+            //return View(catchers.ToList());
             return View(players.ToList());
         }
     }
