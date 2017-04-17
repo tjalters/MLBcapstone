@@ -31,11 +31,16 @@ namespace MLBcapstone.Controllers
 
         public ActionResult PlayerTable()
         {
-            var catchers = from a in db.PlayerInfo
-                           where a.position == "C"
-                           select a;
+            //var catchers = from a in db.PlayerInfo
+            //               where a.position == "C"
+            //               select a;
 
-            return View(catchers.ToList());
+            //return View(catchers.ToList());
+            var players = from a in db.PlayerInfo
+                          orderby a.playerValue
+                          select a;
+
+            return View(players.ToList());
             //return View(db.PlayerInfo.ToList());
         }
     }
