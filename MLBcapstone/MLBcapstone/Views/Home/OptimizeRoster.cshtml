@@ -1,19 +1,16 @@
 ﻿@model IEnumerable<MLBcapstone.Models.PlayersInfo>
 
 @{
-    ViewBag.Title = "PlayerTable";
+    ViewBag.Title = "OptimizeRoster";
 }
 
-<h2>PlayerTable</h2>
+<h2>OptimizeRoster</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.playerName)
-        </th>
         <th>
             @Html.DisplayNameFor(model => model.position)
         </th>
@@ -31,9 +28,6 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.playerName)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.position)
         </td>
@@ -55,5 +49,3 @@
 }
 
 </table>
-
-<p><a href="localhost:58047/Home/OptimizeRoster" class="btn btn-primary btn-lg">Optimize &raquo;</a></p>
