@@ -7,6 +7,7 @@
 <h2>OptimizeRoster</h2>
 
 <p>
+   
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
@@ -28,8 +29,18 @@
         </th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
+    @*<thead>
+        <tr>
+            <th>playerName</th>
+            <th>position</th>
+            <th>playerRating</th>
+            <th>salary</th>
+            <th>playerValue</th>
+        </tr>
+    </thead>*@
+<tbody>
+@foreach (var item in Model)
+{
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.playerName)
@@ -53,6 +64,31 @@
         </td>
     </tr>
 }
-
+   
+    </tbody>
+    @Model.Sum(x => x.playerValue)
 </table>
+
 <input type="button" value="Clear" onclick="location.href='@Url.Action("PlayerTable", "Home")'" />
+
+@*@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#players").DataTable({
+                ajax: {
+                    url: "/Home/OptimizeRoster",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "playerName" ,
+                        render: function(data, type, playerName){
+                            return "<a href='/players/edit/" + player.id + "'>" + player.name + "</a>";
+                        }
+                    }
+                ]
+            
+            });
+</script>*@
+   
