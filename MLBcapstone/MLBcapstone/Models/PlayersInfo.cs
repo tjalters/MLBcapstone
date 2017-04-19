@@ -10,10 +10,13 @@ namespace MLBcapstone.Models
     {
         [Key]
 
+        [Display(Name = "Player Name")]
         public string playerName { get; set; }
         public string position { get; set; }
+        [Display(Name = "Player Rating")]
         public double playerRating { get; set; }
         public double salary { get; set; }
+        [Display(Name = "Player Value")]
         public double playerValue { get; set; }
     }
 }

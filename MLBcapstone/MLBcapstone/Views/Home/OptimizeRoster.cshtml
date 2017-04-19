@@ -4,12 +4,12 @@
     ViewBag.Title = "OptimizeRoster";
 }
 
-<h2>OptimizeRoster</h2>
+<h2>Optimize Roster</h2>
+<br />
+<h5>Total Player Value</h5>
+@Model.Sum(x => x.playerValue)
 
-<p>
-   
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
         <th>
@@ -66,8 +66,8 @@
 }
    
     </tbody>
-    @Model.Sum(x => x.playerValue)
 </table>
+
 
 <input type="button" value="Clear" onclick="location.href='@Url.Action("PlayerTable", "Home")'" />
 

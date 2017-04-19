@@ -163,5 +163,16 @@ namespace MLBcapstone.Controllers
 
             return firstbasemen.ToList();
         }
+
+        public ActionResult OptimizeRosterTwo()
+        {
+            var ListOfStartingPitchersExcludingThe1stLineUp = db.PlayerInfo.Where(x => x.position == "SP").OrderByDescending(y => y.playerValue).Take(5).ToList();
+
+            foreach (var item in PlayersInfo)
+            {
+                ListOfStartingPitchersExcludingThe1stLineUp = from a in db.PlayerInfo where a != item select a;
+            }
+            return View();
+        }
     }
 }
