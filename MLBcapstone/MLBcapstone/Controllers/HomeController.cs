@@ -95,9 +95,19 @@ namespace MLBcapstone.Controllers
 
 
             //}
-
-            return View(players);
-
+            //var newPlayerInfo = from a in db.PlayerInfo
+            //                    select a;
+            //List<PlayersInfo> originalRoster = newPlayerInfo.ToList();
+            //int playersInitialCount = 366;
+            //if(originalRoster.Count == playersInitialCount)
+            //{
+            //    return View(players);
+            //}
+            //else if(originalRoster.Count == (playersInitialCount -= 25))
+            //{
+            //    players = OptimizeRosterTwo(players);
+            //    return View(players);
+            //}
             //double sum = 0;
             //foreach (var item in players)
             //{
@@ -107,8 +117,8 @@ namespace MLBcapstone.Controllers
             //}
 
             //var catchers1 = db.PlayerInfo.Select(x => x.playerValue).ToList();
-
-
+            players = OptimizeRosterTwo(players);
+            return View(players);
 
         }
         public List<PlayersInfo> OptimizeCatchers()
@@ -164,15 +174,52 @@ namespace MLBcapstone.Controllers
             return firstbasemen.ToList();
         }
 
-        public ActionResult OptimizeRosterTwo()
+        public List<PlayersInfo> OptimizeRosterTwo(List<PlayersInfo> players)
         {
-            var ListOfStartingPitchersExcludingThe1stLineUp = db.PlayerInfo.Where(x => x.position == "SP").OrderByDescending(y => y.playerValue).Take(5).ToList();
+            //var ListOfStartingPitchersExcludingThe1stLineUp = db.PlayerInfo.Where(x => x.position == "SP" && x.position != ).OrderByDescending(y => y.playerValue).Take(5).ToList();
 
-            foreach (var item in PlayersInfo)
+            //foreach (var item in )
+            //{
+            //    ListOfStartingPitchersExcludingThe1stLineUp = from a in db.PlayerInfo where a != item select a;
+            //}
+            //return View();
+            //var newPlayerInfo = new PlayersInfo();
+            //foreach(var item in players)
+            //{
+            //    newPlayerInfo = from a in db.PlayerInfo
+
+            //}
+
+            var newPlayerInfo = from a in db.PlayerInfo
+                                select a;
+            var secondTable = newPlayerInfo.ToList();
+            //secondTable.RemoveRange(0, 25);
+            foreach (var item in players)
             {
-                ListOfStartingPitchersExcludingThe1stLineUp = from a in db.PlayerInfo where a != item select a;
+                secondTable.Remove(item);
             }
-            return View();
+            var catchers = secondTable.Where(x => x.position == "C").OrderByDescending(y => y.playerValue).Skip(2).Take(2).ToList();
+            var startingPitchers = secondTable.Where(x => x.position == "SP").OrderByDescending(y => y.playerValue).Skip(5).Take(5).ToList();
+            var reliefPitchers = secondTable.Where(x => x.position == "RP").OrderByDescending(y => y.playerValue).Skip(7).Take(7).ToList();
+            var outfielders = secondTable.Where(x => x.position == "OF").OrderByDescending(y => y.playerValue).Skip(5).Take(5).ToList();
+            var thirdbasemen = secondTable.Where(x => x.position == "3B").OrderByDescending(y => y.playerValue).Skip(2).Take(2).ToList();
+            var secondbasemen = secondTable.Where(x => x.position == "2B").OrderByDescending(y => y.playerValue).Skip(1).Take(1).ToList();
+            var shortstops = secondTable.Where(x => x.position == "SS").OrderByDescending(y => y.playerValue).Skip(2).Take(2).ToList();
+            var firstbasemen = secondTable.Where(x => x.position == "1B").OrderByDescending(y => y.playerValue).Skip(1).Take(1).ToList();
+
+            List<PlayersInfo> nextTierPlayers = new List<PlayersInfo>();
+            nextTierPlayers.AddRange(catchers);
+            nextTierPlayers.AddRange(startingPitchers);
+            nextTierPlayers.AddRange(reliefPitchers);
+            nextTierPlayers.AddRange(outfielders);
+            nextTierPlayers.AddRange(thirdbasemen);
+            nextTierPlayers.AddRange(secondbasemen);
+            nextTierPlayers.AddRange(shortstops);
+            nextTierPlayers.AddRange(firstbasemen);
+
+            players.AddRange(nextTierPlayers);
+            return (players);
+            
         }
     }
 }

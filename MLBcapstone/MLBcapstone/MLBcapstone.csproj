@@ -205,6 +205,10 @@
     <Compile Include="Migrations\201704101704534_player info.Designer.cs">
       <DependentUpon>201704101704534_player info.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704191533498_deleted name.cs" />
+    <Compile Include="Migrations\201704191533498_deleted name.Designer.cs">
+      <DependentUpon>201704191533498_deleted name.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -214,6 +218,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-cerulean.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
@@ -463,6 +468,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201704101704534_player info.resx">
       <DependentUpon>201704101704534_player info.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704191533498_deleted name.resx">
+      <DependentUpon>201704191533498_deleted name.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
