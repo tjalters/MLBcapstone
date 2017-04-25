@@ -1,11 +1,19 @@
 ﻿@model IEnumerable<MLBcapstone.Models.PlayersInfo>
-
 @{
     ViewBag.Title = "PlayerTable";
 }
 
 <h2>Player Table</h2>
 <br />
+@*<div class="form-group">
+    @Html.LabelFor(m => m.SalaryRange, new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.DropDownListFor(m => m.SalaryRange, new SelectList(Model.SalaryRange, "Id", "Range"), "", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.SalaryRangeId)
+    </div>
+</div>*@
+
+
 <input type="button" value="Optimize" onclick="location.href='@Url.Action("OptimizeRoster", "Home")'" />
 <table class="table">
     <tr>

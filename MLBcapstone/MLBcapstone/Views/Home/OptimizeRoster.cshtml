@@ -139,6 +139,72 @@
     </tbody>
 </table>
 
+<table class="table">
+
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.playerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.position)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.playerRating)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.salary)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.playerValue)
+        </th>
+        <th></th>
+    </tr>
+    @*<thead>
+            <tr>
+                <th>playerName</th>
+                <th>position</th>
+                <th>playerRating</th>
+                <th>salary</th>
+                <th>playerValue</th>
+            </tr>
+        </thead>*@
+    <tbody>
+        @*@foreach (var item in Model)*@
+        @{ var itemThree = Model.ToList();
+            for (int i = 50; i < item.Count; i++)
+            {
+
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item[i].playerName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item[i].position)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item[i].playerRating)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item[i].salary)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item[i].playerValue)
+                    </td>
+                    @*<td>
+                            @Html.ActionLink("Edit", "Edit", new { id=item.playerName }) |
+                            @Html.ActionLink("Details", "Details", new { id=item.playerName }) |
+                            @Html.ActionLink("Delete", "Delete", new { id=item.playerName })
+                        </td>*@
+                </tr>
+            }
+
+        }
+    </tbody>
+</table>
+
+
+
+
 
 <input type="button" value="Clear" onclick="location.href='@Url.Action("PlayerTable", "Home")'" />
 

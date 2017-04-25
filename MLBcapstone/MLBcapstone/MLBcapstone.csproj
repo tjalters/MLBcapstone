@@ -209,11 +209,16 @@
     <Compile Include="Migrations\201704191533498_deleted name.Designer.cs">
       <DependentUpon>201704191533498_deleted name.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704251506385_salary.cs" />
+    <Compile Include="Migrations\201704251506385_salary.Designer.cs">
+      <DependentUpon>201704251506385_salary.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PlayersInfo.cs" />
+    <Compile Include="Models\SalaryRanges.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -471,6 +476,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704191533498_deleted name.resx">
       <DependentUpon>201704191533498_deleted name.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704251506385_salary.resx">
+      <DependentUpon>201704251506385_salary.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
