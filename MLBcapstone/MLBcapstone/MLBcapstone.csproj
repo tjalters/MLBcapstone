@@ -462,6 +462,10 @@
     <Content Include="Views\Home\OptimizeRosterThree.cshtml" />
     <Content Include="Views\Home\OptimizeRosterFour.cshtml" />
     <Content Include="Views\Home\OptimizeRosterBasedOnPlayerRating.cshtml" />
+    <Content Include="Views\Home\OptimizeRosterTwoBasedOnPlayerRating.cshtml" />
+    <Content Include="Views\Home\OptimizeRosterThreeBasedOnPlayerRating.cshtml" />
+    <Content Include="Views\Home\OptimizeRosterMostExpensive.cshtml" />
+    <Content Include="Views\Home\OptimizeRosterSecondMostExpensive.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
