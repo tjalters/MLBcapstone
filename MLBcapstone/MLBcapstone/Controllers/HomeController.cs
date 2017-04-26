@@ -68,16 +68,7 @@ namespace MLBcapstone.Controllers
 
             //}
 
-            //return View(players.ToList());
-
-
-            //var catchers = from a in db.PlayerInfo.Take(25)
-            //               where a.position.ToList() == "C".ToList()
-            //               orderby a.playerValue descending
-            //               select a;
-            //var catchers = db.PlayerInfo.Where(x => x.position == "C").OrderByDescending(y => y.playerValue).Take(2).ToList();
-
-            //var startingPitchers = db.PlayerInfo.Where(x => x.position == "SP").OrderByDescending(y => y.playerValue).Take(5).ToList();
+            //return View(players.ToList())
 
             List<PlayersInfo> catchers = OptimizeCatchers();
             List<PlayersInfo> startingPitchers = OptimizeStartingPitchers();
@@ -104,42 +95,14 @@ namespace MLBcapstone.Controllers
             //{
             //    sum += item.playerValue;
 
-
-            //}
-            //var newPlayerInfo = from a in db.PlayerInfo
-            //                    select a;
-            //List<PlayersInfo> originalRoster = newPlayerInfo.ToList();
-            //int playersInitialCount = 366;
-            //if(originalRoster.Count == playersInitialCount)
-            //{
-            //    return View(players);
-            //}
-            //else if(originalRoster.Count == (playersInitialCount -= 25))
-            //{
-            //    players = OptimizeRosterTwo(players);
-            //    return View(players);
-            //}
-            //double sum = 0;
-            //foreach (var item in players)
-            //{
-            //    sum += item.playerValue;
-
-
-            //}
-
-            //var catchers1 = db.PlayerInfo.Select(x => x.playerValue).ToList();
-            players = OptimizeRosterThree(players);
-            players = OptimizeRosterTwo(players);
+            //players = OptimizeRosterThree(players);
+            //OptimizeRosterTwo();
             return View(players);
 
         }
         public List<PlayersInfo> OptimizeCatchers()
         {
             var catchers = db.PlayerInfo.Where(x => x.position == "C").OrderByDescending(y => y.playerValue).Take(2).ToList();
-
-            //var catchers1 = db.PlayerInfo.Select(x => x.playerValue).ToList();
-
-
 
             return catchers.ToList();
         }
@@ -181,20 +144,14 @@ namespace MLBcapstone.Controllers
         }
         public List<PlayersInfo> OptimizeFirstBasemen()
         {
-            var firstbasemen = db.PlayerInfo.Where(x => x.position == "1B").OrderByDescending(y => y.playerValue).Take(1).ToList();
+            var firstbasemen = db.PlayerInfo.Where(x => x.position == "1B").OrderByDescending(y => y.playerRating).Take(1).ToList();
 
             return firstbasemen.ToList();
         }
 
-        public List<PlayersInfo> OptimizeRosterTwo(List<PlayersInfo> players)
+        public ActionResult OptimizeRosterTwo()
         {
-            //var ListOfStartingPitchersExcludingThe1stLineUp = db.PlayerInfo.Where(x => x.position == "SP" && x.position != ).OrderByDescending(y => y.playerValue).Take(5).ToList();
 
-            //foreach (var item in )
-            //{
-            //    ListOfStartingPitchersExcludingThe1stLineUp = from a in db.PlayerInfo where a != item select a;
-            //}
-            //return View();
             //var newPlayerInfo = new PlayersInfo();
             //foreach(var item in players)
             //{
@@ -206,10 +163,10 @@ namespace MLBcapstone.Controllers
                                 select a;
             var secondRoster = newPlayerInfo.ToList();
             //secondTable.RemoveRange(0, 25);
-            foreach (var item in players)
-            {
-                secondRoster.Remove(item);
-            }
+            //foreach (var item in players)
+            //{
+            //    secondRoster.Remove(item);
+            //}
             var catchers = secondRoster.Where(x => x.position == "C").OrderByDescending(y => y.playerValue).Skip(2).Take(2).ToList();
             var startingPitchers = secondRoster.Where(x => x.position == "SP").OrderByDescending(y => y.playerValue).Skip(5).Take(5).ToList();
             var reliefPitchers = secondRoster.Where(x => x.position == "RP").OrderByDescending(y => y.playerValue).Skip(7).Take(7).ToList();
@@ -229,32 +186,33 @@ namespace MLBcapstone.Controllers
             SecondTierPlayers.AddRange(shortstops);
             SecondTierPlayers.AddRange(firstbasemen);
 
-            players.AddRange(SecondTierPlayers);
-            return (players);
+            SecondTierPlayers.AddRange(SecondTierPlayers);
+            return View("OptimizeRosterTwo", SecondTierPlayers);
             
         }
-        public List<PlayersInfo> OptimizeRosterThree(List<PlayersInfo> players)
+        public ActionResult OptimizeRosterThree()
         {
             var rosterThreeInfo = from a in db.PlayerInfo
                                 select a;
             var ThirdRoster = rosterThreeInfo.ToList();
             //secondTable.RemoveRange(0, 25);
-            List<PlayersInfo> firstSecondCombo = new List<PlayersInfo>();
-            firstSecondCombo.AddRange(players);
-           
-    
-            foreach (var item in firstSecondCombo)
-            {
-                ThirdRoster.Remove(item);
-            }
-            var catchers = ThirdRoster.Where(x => x.position == "C").OrderByDescending(y => y.playerValue).Skip(2).Take(2).ToList();
-            var startingPitchers = ThirdRoster.Where(x => x.position == "SP").OrderByDescending(y => y.playerValue).Skip(5).Take(5).ToList();
-            var reliefPitchers = ThirdRoster.Where(x => x.position == "RP").OrderByDescending(y => y.playerValue).Skip(7).Take(7).ToList();
-            var outfielders = ThirdRoster.Where(x => x.position == "OF").OrderByDescending(y => y.playerValue).Skip(5).Take(5).ToList();
-            var thirdbasemen = ThirdRoster.Where(x => x.position == "3B").OrderByDescending(y => y.playerValue).Skip(2).Take(2).ToList();
-            var secondbasemen = ThirdRoster.Where(x => x.position == "2B").OrderByDescending(y => y.playerValue).Skip(1).Take(1).ToList();
-            var shortstops = ThirdRoster.Where(x => x.position == "SS").OrderByDescending(y => y.playerValue).Skip(2).Take(2).ToList();
-            var firstbasemen = ThirdRoster.Where(x => x.position == "1B").OrderByDescending(y => y.playerValue).Skip(1).Take(1).ToList();
+            //List<PlayersInfo> firstSecondCombo = new List<PlayersInfo>();
+            //firstSecondCombo.AddRange(players);
+            //firstSecondCombo.AddRange(SecondTierRoster);
+
+
+            //foreach (var item in firstSecondCombo)
+            //{
+            //    ThirdRoster.Remove(item);
+            //}
+            var catchers = ThirdRoster.Where(x => x.position == "C").OrderByDescending(y => y.playerValue).Skip(4).Take(2).ToList();
+            var startingPitchers = ThirdRoster.Where(x => x.position == "SP").OrderByDescending(y => y.playerValue).Skip(10).Take(5).ToList();
+            var reliefPitchers = ThirdRoster.Where(x => x.position == "RP").OrderByDescending(y => y.playerValue).Skip(14).Take(7).ToList();
+            var outfielders = ThirdRoster.Where(x => x.position == "OF").OrderByDescending(y => y.playerValue).Skip(10).Take(5).ToList();
+            var thirdbasemen = ThirdRoster.Where(x => x.position == "3B").OrderByDescending(y => y.playerValue).Skip(4).Take(2).ToList();
+            var secondbasemen = ThirdRoster.Where(x => x.position == "2B").OrderByDescending(y => y.playerValue).Skip(2).Take(1).ToList();
+            var shortstops = ThirdRoster.Where(x => x.position == "SS").OrderByDescending(y => y.playerValue).Skip(4).Take(2).ToList();
+            var firstbasemen = ThirdRoster.Where(x => x.position == "1B").OrderByDescending(y => y.playerValue).Skip(2).Take(1).ToList();
 
             List<PlayersInfo> ThirdTierPlayers = new List<PlayersInfo>();
             ThirdTierPlayers.AddRange(catchers);
@@ -266,8 +224,143 @@ namespace MLBcapstone.Controllers
             ThirdTierPlayers.AddRange(shortstops);
             ThirdTierPlayers.AddRange(firstbasemen);
 
-            players.AddRange(ThirdTierPlayers);
-            return (players);
+            ThirdTierPlayers.AddRange(ThirdTierPlayers);
+            return View("OptimizeRosterThree", ThirdTierPlayers);
+        }
+
+        public ActionResult OptimizeRosterFour()
+        {
+            var rosterFourInfo = from a in db.PlayerInfo
+                                  select a;
+            var FourthRoster = rosterFourInfo.ToList();
+            //secondTable.RemoveRange(0, 25);
+            //List<PlayersInfo> firstSecondCombo = new List<PlayersInfo>();
+            //firstSecondCombo.AddRange(players);
+            //firstSecondCombo.AddRange(SecondTierRoster);
+
+
+            //foreach (var item in firstSecondCombo)
+            //{
+            //    ThirdRoster.Remove(item);
+            //}
+            var catchers = FourthRoster.Where(x => x.position == "C").OrderByDescending(y => y.playerValue).Skip(4).Take(2).ToList();
+            var startingPitchers = FourthRoster.Where(x => x.position == "SP").OrderByDescending(y => y.playerValue).Skip(10).Take(5).ToList();
+            var reliefPitchers = FourthRoster.Where(x => x.position == "RP").OrderByDescending(y => y.playerValue).Skip(14).Take(7).ToList();
+            var outfielders = FourthRoster.Where(x => x.position == "OF").OrderByDescending(y => y.playerValue).Skip(10).Take(5).ToList();
+            var thirdbasemen = FourthRoster.Where(x => x.position == "3B").OrderByDescending(y => y.playerValue).Skip(4).Take(2).ToList();
+            var secondbasemen = FourthRoster.Where(x => x.position == "2B").OrderByDescending(y => y.playerValue).Skip(2).Take(1).ToList();
+            var shortstops = FourthRoster.Where(x => x.position == "SS").OrderByDescending(y => y.playerValue).Skip(4).Take(2).ToList();
+            var firstbasemen = FourthRoster.Where(x => x.position == "1B").OrderByDescending(y => y.playerValue).Skip(2).Take(1).ToList();
+
+            List<PlayersInfo> FourthTierPlayers = new List<PlayersInfo>();
+            FourthTierPlayers.AddRange(catchers);
+            FourthTierPlayers.AddRange(startingPitchers);
+            FourthTierPlayers.AddRange(reliefPitchers);
+            FourthTierPlayers.AddRange(outfielders);
+            FourthTierPlayers.AddRange(thirdbasemen);
+            FourthTierPlayers.AddRange(secondbasemen);
+            FourthTierPlayers.AddRange(shortstops);
+            FourthTierPlayers.AddRange(firstbasemen);
+
+            FourthTierPlayers.AddRange(FourthTierPlayers);
+            return View("OptimizeRosterFour", FourthTierPlayers);
+        }
+
+
+
+        public ActionResult OptimizeRosterBasedOnPlayerRating()
+        {
+            //var players = from a in db.PlayerInfo.Take(25)
+            //              orderby a.playerValue descending
+            //              select a;
+
+            //double sum = 0;
+            //foreach (var item in players)
+            //{
+            //    sum += item.playerValue;
+
+
+            //}+
+
+            //return View(players.ToList())
+
+            List<PlayersInfo> catchers = OptimizeCatchersByRating();
+            List<PlayersInfo> startingPitchers = OptimizeStartingPitchersByRating();
+            List<PlayersInfo> reliefPitchers = OptimizeReliefPitchersByRating();
+            List<PlayersInfo> outfielders = OptimizeOutfieldersByRating();
+            List<PlayersInfo> thirdbasemen = OptimizeThirdBasemenByRating();
+            List<PlayersInfo> secondbasemen = OptimizeSecondBasemenByRating();
+            List<PlayersInfo> shortstops = OptimizeShortStopsByRating();
+            List<PlayersInfo> firstbasemen = OptimizeFirstBasemenByRating();
+
+
+            List<PlayersInfo> players = new List<PlayersInfo>();
+            players.AddRange(catchers);
+            players.AddRange(startingPitchers);
+            players.AddRange(reliefPitchers);
+            players.AddRange(outfielders);
+            players.AddRange(thirdbasemen);
+            players.AddRange(secondbasemen);
+            players.AddRange(shortstops);
+            players.AddRange(firstbasemen);
+
+            //double sum = 0;
+            //foreach (var item in players)
+            //{
+            //    sum += item.playerValue;
+
+            //players = OptimizeRosterThree(players);
+            //OptimizeRosterTwo();
+            return View(players);
+
+        }
+        public List<PlayersInfo> OptimizeCatchersByRating()
+        {
+            var catchers = db.PlayerInfo.Where(x => x.position == "C").OrderByDescending(y => y.playerRating).Take(2).ToList();
+
+            return catchers.ToList();
+        }
+        public List<PlayersInfo> OptimizeStartingPitchersByRating()
+        {
+            var startingPitchers = db.PlayerInfo.Where(x => x.position == "SP").OrderByDescending(y => y.playerRating).Take(5).ToList();
+
+            return startingPitchers.ToList();
+        }
+        public List<PlayersInfo> OptimizeReliefPitchersByRating()
+        {
+            var reliefPitchers = db.PlayerInfo.Where(x => x.position == "RP").OrderByDescending(y => y.playerRating).Take(7).ToList();
+
+            return reliefPitchers.ToList();
+        }
+        public List<PlayersInfo> OptimizeOutfieldersByRating()
+        {
+            var outfielders = db.PlayerInfo.Where(x => x.position == "OF").OrderByDescending(y => y.playerRating).Take(5).ToList();
+
+            return outfielders.ToList();
+        }
+        public List<PlayersInfo> OptimizeThirdBasemenByRating()
+        {
+            var thirdbasemen = db.PlayerInfo.Where(x => x.position == "3B").OrderByDescending(y => y.playerRating).Take(2).ToList();
+
+            return thirdbasemen.ToList();
+        }
+        public List<PlayersInfo> OptimizeSecondBasemenByRating()
+        {
+            var secondbasemen = db.PlayerInfo.Where(x => x.position == "2B").OrderByDescending(y => y.playerRating).Take(1).ToList();
+
+            return secondbasemen.ToList();
+        }
+        public List<PlayersInfo> OptimizeShortStopsByRating()
+        {
+            var shortstops = db.PlayerInfo.Where(x => x.position == "SS").OrderByDescending(y => y.playerRating).Take(2).ToList();
+
+            return shortstops.ToList();
+        }
+        public List<PlayersInfo> OptimizeFirstBasemenByRating()
+        {
+            var firstbasemen = db.PlayerInfo.Where(x => x.position == "1B").OrderByDescending(y => y.playerRating).Take(1).ToList();
+
+            return firstbasemen.ToList();
         }
     }
 }

@@ -15,6 +15,8 @@
 
 
 <input type="button" value="Optimize" onclick="location.href='@Url.Action("OptimizeRoster", "Home")'" />
+<br/>
+<input type="button" value="Optimize Based On Rating" onclick="location.href='@Url.Action("OptimizeRosterBasedOnPlayerRating", "Home")'" />
 <table class="table">
     <tr>
         <th>
@@ -30,7 +32,7 @@
             @Html.DisplayNameFor(model => model.salary)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.playerValue)
+            @Html.DisplayNameFor(model => model.playerRating)
         </th>
         <th></th>
     </tr>
@@ -50,7 +52,7 @@
             @Html.DisplayFor(modelItem => item.salary)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.playerValue)
+            @Html.DisplayFor(modelItem => item.playerRating)
         </td>
         @*<td>
             @Html.ActionLink("Edit", "Edit", new { id=item.playerName }) |

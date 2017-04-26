@@ -458,6 +458,10 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\PlayerTable.cshtml" />
     <Content Include="Views\Home\OptimizeRoster.cshtml" />
+    <Content Include="Views\Home\OptimizeRosterTwo.cshtml" />
+    <Content Include="Views\Home\OptimizeRosterThree.cshtml" />
+    <Content Include="Views\Home\OptimizeRosterFour.cshtml" />
+    <Content Include="Views\Home\OptimizeRosterBasedOnPlayerRating.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
