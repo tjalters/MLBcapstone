@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<MLBcapstone.Models.PlayersInfo>
 
 @{
-    ViewBag.Title = "OptimizeRosterSecondMostExpensive";
+    ViewBag.Title = "OptimizeRosterCheapest";
 }
 
-<h2>Second Most Expensive Roster</h2>
+<h2>Optimize Cheapest Roster</h2>
 <br />
 <h5>Combined Player Rating</h5>
 @Model.Sum(x => x.playerRating)
@@ -13,7 +13,7 @@
 <h5>Combined Player Value</h5>
 @Model.Sum(x => x.playerValue)
 
-<input type="button" value="Optimize Third Most Expensive Roster" onclick="location.href='@Url.Action("OptimizeRosterThirdMostExpensive", "Home")'" />
+<input type="button" value="Optimize Second Cheapest Roster" onclick="location.href='@Url.Action("OptimizeRosterSecondCheapest", "Home")'" />
 
 <table class="table">
     <tr>
@@ -36,7 +36,7 @@
     </tr>
 
 @{ var item = Model.ToList();
-    for (int i = 25; i < item.Count; i++)
+    for (int i = 0; i < 25; i++)
     {
     <tr>
         <td>
